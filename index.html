@@ -1,37 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Sample Registration Form</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SEQ TEST Form</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <h2>Registration Form</h2>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
 
-  <form action="/submit_form" method="post">
-    <label for="name">Full Name:</label><br>
-    <input type="text" id="name" name="name"><br><br>
+  <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+    <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">CSS3311 Software Quality Assurance Form</h2>
 
-    <label for="email">Email:</label><br>
-    <input type="email" id="email" name="email"><br><br>
+    <form id="registrationForm" class="space-y-5">
 
-    <label>Gender:</label><br>
-    <input type="radio" id="male" name="gender" value="male">
-    <label for="male">Male</label><br>
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700">Full Name:</label>
+        <input type="text" id="name" name="name" required
+          class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
 
-    <input type="radio" id="female" name="gender" value="female">
-    <label for="female">Female</label><br><br>
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Email:</label>
+        <input type="email" id="email" name="email" required
+          class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
 
-    <label for="country">Country:</label><br>
-    <select id="country" name="country">
-      <option value="Sri Lanka">Sri Lanka</option>
-      <option value="India">India</option>
-      <option value="USA">USA</option>
-    </select><br><br>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Gender:</label>
+        <div class="flex items-center space-x-4">
+          <label class="flex items-center space-x-2">
+            <input type="radio" id="male" name="gender" value="Male" required
+              class="text-blue-600 focus:ring-blue-500" />
+            <span>Male</span>
+          </label>
+          <label class="flex items-center space-x-2">
+            <input type="radio" id="female" name="gender" value="Female"
+              class="text-pink-600 focus:ring-pink-500" />
+            <span>Female</span>
+          </label>
+        </div>
+      </div>
 
-    <input type="checkbox" id="agree" name="agree">
-    <label for="agree">I agree to the terms and conditions</label><br><br>
+      <div>
+        <label for="country" class="block text-sm font-medium text-gray-700">Country:</label>
+        <select id="country" name="country" required
+          class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="Sri Lanka">Sri Lanka</option>
+          <option value="India">India</option>
+          <option value="USA">USA</option>
+        </select>
+      </div>
 
-    <input type="submit" value="Register">
-  </form>
+      <div class="flex items-center">
+        <input type="checkbox" id="agree" name="agree" required
+          class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
+        <label for="agree" class="ml-2 block text-sm text-gray-700">I agree to the terms and conditions</label>
+      </div>
+
+      <div>
+        <button type="submit"
+          class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors">
+          Register
+        </button>
+      </div>
+    </form>
+
+    <!-- Response message area -->
+    <div id="responseMessage" class="mt-6 hidden p-4 rounded-md bg-green-100 text-green-800 text-sm font-medium"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('registrationForm');
+    const responseMessage = document.getElementById('responseMessage');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault(); // prevent page reload
+
+      // Get input values
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const gender = form.gender.value;
+      const country = document.getElementById('country').value;
+
+      // Show response
+      responseMessage.innerHTML = `
+        ✅ Registration successful!<br>
+        <strong>Name:</strong> ${name}<br>
+        <strong>Email:</strong> ${email}<br>
+        <strong>Gender:</strong> ${gender}<br>
+        <strong>Country:</strong> ${country}
+      `;
+      responseMessage.classList.remove('hidden');
+    });
+  </script>
 
 </body>
 </html>
